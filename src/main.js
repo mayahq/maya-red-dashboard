@@ -463,6 +463,54 @@ app.controller("MainController", [
         main.globals = ui.globals;
         main.nothing = false;
         var name;
+        var queryString = window.location.search;
+        var urlParams = new URLSearchParams(queryString);
+        if (urlParams.get("theme") === "angular") {
+          ui.site = {
+            allowSwipe: "true",
+            allowTempTheme: "true",
+            dateFormat: "DD/MM/YYYY",
+            hideToolbar: "true",
+            lockMenu: "false",
+            name: "Maya-RED Dashboard",
+            sizes: { cx: 6, cy: 6, gx: 6, gy: 6, px: 0, py: 0, sx: 48, sy: 48 },
+          };
+          ui.theme = {
+            angularTheme: {
+              accents: "blue",
+              background: "grey",
+              primary: "indigo",
+              warn: "red",
+            },
+            name: "theme-light",
+            themeState: {
+              "base-color": {
+                default: "#0094CE",
+                value: "#0094CE",
+                edited: false,
+              },
+              "base-font": {
+                value:
+                  "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,O…n-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+              },
+              "group-backgroundColor": { value: "#ffffff", edited: false },
+              "group-borderColor": { value: "#ffffff", edited: false },
+              "group-textColor": { value: "#1bbfff", edited: false },
+              "page-backgroundColor": { value: "#fafafa", edited: false },
+              "page-sidebar-backgroundColor": {
+                value: "#ffffff",
+                edited: false,
+              },
+              "page-titlebar-backgroundColor": {
+                value: "#0094CE",
+                edited: false,
+              },
+              "widget-backgroundColor": { value: "#0094ce", edited: false },
+              "widget-borderColor": { value: "#ffffff", edited: false },
+              "widget-textColor": { value: "#111111", edited: false },
+            },
+          };
+        }
         if (ui.site) {
           name = main.name = ui.site.name;
           main.hideToolbar = ui.site.hideToolbar == "true";
@@ -480,6 +528,7 @@ app.controller("MainController", [
             main.sizes = ui.site.sizes;
           }
         }
+
         console.log(ui);
 
         if (ui.theme && ui.theme.angularTheme) {
@@ -492,8 +541,7 @@ app.controller("MainController", [
           if (ui.theme.angularTheme.palette === "dark") {
             themeProvider.theme("default").dark();
           }
-          var queryString = window.location.search;
-          var urlParams = new URLSearchParams(queryString);
+
           if (urlParams.get("mode") === "dark") {
             themeProvider.theme("default").dark();
           }
