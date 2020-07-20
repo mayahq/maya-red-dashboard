@@ -1,0 +1,26 @@
+<md-card 
+    ui-card-size="{{ me.item.width }}x{{ me.item.height }}" 
+    flex 
+    layout="row" 
+    layout-align="space-between center" 
+    class="nr-dashboard-date-picker" 
+    ng-class="{'nr-dashboard-disabled':me.item.disabled}">
+    <md-input-container flex layout="row">
+        <p  class="nr-dashboard-date-picker-label" 
+            ng-if="me.item.label" 
+            ng-bind-html="me.item.getLabel()">
+        </p>
+        <input mdc-datetime-picker date="true" time="true" type="text" 
+               short-time="true"
+               show-todays-date 
+               click-outside-to-close="true"
+               placeholder="YYYY-MM-DD HH:MM"
+               seconds="false" 
+               auto-ok="true"
+               min-date="minDate" 
+               minute-steps="1"
+               format="hh:mm a"
+               ng-change="me.setDateTime()"
+               ng-model="me.item.ddd">
+    </md-input-container>
+</md-card>
