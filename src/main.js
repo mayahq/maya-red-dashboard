@@ -181,6 +181,8 @@ app.controller("MainController", [
       if ($location.path() === "/" + tabId) {
         return;
       }
+      // This is the thing to change
+
       var tabIdFromUrlPath = parseInt($location.path().split("/")[1], 10);
       if (!isNaN(tabIdFromUrlPath)) {
         var menu = main.menu[tabIdFromUrlPath];
@@ -604,8 +606,32 @@ app.controller("MainController", [
           prevTabIndex < main.menu.length &&
           !main.menu[prevTabIndex].disabled
         ) {
+          //Change selected tab here
+          console.log("main.selectedTab = main.menu[prevTabIndex];");
           main.selectedTab = main.menu[prevTabIndex];
           finishLoading();
+        } else if (urlParams.get("tab")) {
+          $timeout(function () {
+            var tabMenuId = urlParams.get("tab");
+            // open first menu, which is not new tab link, and is not disabled
+            var indexToOpen = null;
+            main.menu.some(function (menu, i) {
+              if (menu.id === tabMenuId) {
+                if (!menu.disabled) {
+                  indexToOpen = i;
+                  return true;
+                } else {
+                  return false;
+                }
+              }
+            });
+            if (indexToOpen !== null) {
+              main.open(main.menu[indexToOpen], indexToOpen);
+              finishLoading();
+            } else {
+              main.nothing = true;
+            }
+          }, 50);
         } else {
           $timeout(function () {
             // open first menu, which is not new tab link, and is not disabled
