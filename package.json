@@ -1,7 +1,7 @@
 {
-    "name": "node-red-dashboard",
-    "version": "2.23.0",
-    "description": "A set of dashboard nodes for Node-RED",
+    "name": "maya-red-dashboard",
+    "version": "1.0.0",
+    "description": "A set of dashboard nodes for Maya-RED",
     "keywords": [
         "node-red"
     ],
